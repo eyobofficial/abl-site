@@ -1,6 +1,8 @@
 {% extends 'base1.html' %}
 {% load static %}
 
+{% block title %}Home - ABL Engineering PLC{% endblock %}
+
 {% block hero %}
 <section class="hero-unit hero-fullscreen-bg fullscreen-image hero-rotating-words">
     <div class="container">
@@ -121,106 +123,34 @@
     </div>
 </section>
 <!-- END WHAT WE DO -->
-<!-- PRICING -->
-<section>
-    <div class="container">
-        <h2 class="section-heading">Pricing</h2>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 pricing-table">
-                <div class="top">
-                    <h3 class="heading">Basic</h3>
-                    <p class="pricing">$25/mo</p>
-                </div>
-                <div class="bottom">
-                    <ul class="list-unstyled list-details">
-                        <li>5 GB upload quota</li>
-                        <li>10 GB file storage</li>
-                        <li>Up to 2 Mbps download speed</li>
-                        <li>Unlimited bandwidth</li>
-                        <li>Professional support</li>
-                    </ul>
-                    <a href="#" class="btn btn-default">SUBSCRIBE</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 pricing-table pricing-recommended">
-                <div class="top">
-                    <h3 class="heading">Premium</h3>
-                    <p class="pricing">$49/mo</p>
-                </div>
-                <div class="bottom">
-                    <ul class="list-unstyled list-details">
-                        <li>5 GB upload quota</li>
-                        <li>10 GB file storage</li>
-                        <li>Up to 2 Mbps download speed</li>
-                        <li>Unlimited bandwidth</li>
-                        <li>Professional support</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary">SUBSCRIBE</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 pricing-table">
-                <div class="top">
-                    <h3 class="heading">Pro</h3>
-                    <p class="pricing">$99/mo</p>
-                </div>
-                <div class="bottom">
-                    <ul class="list-unstyled list-details">
-                        <li>5 GB upload quota</li>
-                        <li>10 GB file storage</li>
-                        <li>Up to 2 Mbps download speed</li>
-                        <li>Unlimited bandwidth</li>
-                        <li>Professional support</li>
-                    </ul>
-                    <a href="#" class="btn btn-default">SUBSCRIBE</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 pricing-table">
-                <div class="top">
-                    <h3 class="heading">Ultimate</h3>
-                    <p class="pricing">$150/mo</p>
-                </div>
-                <div class="bottom">
-                    <ul class="list-unstyled list-details">
-                        <li>5 GB upload quota</li>
-                        <li>10 GB file storage</li>
-                        <li>Up to 2 Mbps download speed</li>
-                        <li>Unlimited bandwidth</li>
-                        <li>Professional support</li>
-                    </ul>
-                    <a href="#" class="btn btn-default">SUBSCRIBE</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END PRICING -->
+
 <!-- TESTIMONIAL -->
 <section>
     <div class="container">
-        <h2 class="sr-only">Testimonial</h2>
+        <h2 class="sr-only">Testimonials</h2>
         <div id="testimonial-standard-carousel" class="testimonial-carousel testimonial-standard-carousel owl-carousel">
             <div class="testimonial-standard">
-                <p class="content">"Now, this is cool! Kudos to the guys behind it."</p>
+                <p class="content">"{% lorem 10 w random %}"</p>
                 <div class="author">
-                    <img src="{% static 'assets/img/testimonial-author2.png' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Edward Freeman</span>
-                    <span class="title text-muted-2x">Front-end Freelancer</span>
+                    <img src="{% static 'p1/assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
+                    <span class="name">Abebe Kebede</span>
+                    <span class="title text-muted-2x">Owner Some Company</span>
                 </div>
             </div>
             <div class="testimonial-standard">
-                <p class="content">"The theme is getting better and better"</p>
+                <p class="content">"{% lorem 10 w random %}"</p>
                 <div class="author">
-                    <img src="{% static 'assets/img/testimonial-author3.png' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Howard Mendez</span>
-                    <span class="title text-muted-2x">Art Director of Dream Corp.</span>
+                    <img src="{% static 'p1/assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
+                    <span class="name">Almaz Kebede</span>
+                    <span class="title text-muted-2x">Managing Director of Xyz Firm</span>
                 </div>
             </div>
             <div class="testimonial-standard">
-                <p class="content">“It’s really, an extraordinary theme”</p>
+                <p class="content">"{% lorem 10 w random %}"</p>
                 <div class="author">
-                    <img src="{% static 'assets/img/testimonial-author.png' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Emily Murray</span>
-                    <span class="title text-muted-2x">CEO of TheCompany</span>
+                    <img src="{% static 'p1/assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
+                    <span class="name">Eyob Tariku</span>
+                    <span class="title text-muted-2x">Esteemed Customer</span>
                 </div>
             </div>
         </div>
@@ -234,19 +164,19 @@
         <p class="text-center">For over 5 years, we have been trusted by big companies below</p>
         <ul class="list-inline list-logo">
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo1.png' %}" alt="logo"></a>
+                <a href="#"><img src="{% static 'p1/assets/img/clients/logo1.png' %}" alt="logo"></a>
             </li>
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo2.png' %}" alt="logo"></a>
+                <a href="#"><img src="{% static 'p1/assets/img/clients/logo2.png' %}" alt="logo"></a>
             </li>
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo3.png' %}" alt="logo"></a>
+                <a href="#"><img src="{% static 'p1/assets/img/clients/logo3.png' %}" alt="logo"></a>
             </li>
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo4.png' %}" alt="logo"></a>
+                <a href="#"><img src="{% static 'p1/assets/img/clients/logo4.png' %}" alt="logo"></a>
             </li>
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo5.png'%}" alt="logo"></a>
+                <a href="#"><img src="{% static 'p1/assets/img/clients/logo5.png'%}" alt="logo"></a>
             </li>
         </ul>
     </div>
