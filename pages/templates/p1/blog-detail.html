@@ -1,0 +1,169 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+<!-- BREADCRUMBS -->
+<div class="page-header breadcrumbs-only">
+    <div class="container">
+        <ol class="breadcrumb link-accent">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li class="active">Post</li>
+        </ol>
+    </div>
+</div>
+<!-- END BREADCRUMBS -->
+<!-- PAGE CONTENT -->
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- blog post -->
+                <article class="entry-post entry-post-single">
+                    <header class="entry-header">
+                        <h1 class="entry-title">Modern Electrical Design Practices</h1>
+                        <div class="meta-line">
+                            <span class="post-author"><i class="fa fa-user"></i> <a href="#">Wosen</a></span>
+                            <span class="post-date"><i class="fa fa-calendar"></i> {% now 'M d, Y' %}</span>
+                            <span class="post-comment"><i class="fa fa-comments"></i> <a href="#">4 Comments</a></span>
+                        </div>
+                    </header>
+                    <figure class="media">
+                        <a href="blog-post.html">
+                            <img src="{% static 'p1/assets/img/blog/blog-placeholder.png' %}" alt="Image Thumbnail">
+                        </a>
+                    </figure>
+                    <div class="content">
+                        {% lorem 5 p %}
+                    </div>
+                </article>
+                <!-- end blog post -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-offset-6">
+                        <!-- social sharing -->
+                        <div class="post-social-sharing text-right">
+                            <h3 class="section-heading">Share This Story: </h3>
+                            <ul class="list-inline social-icons social-icons-small">
+                                <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                                <li><a href="#" class="google-plus-bg"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- end social sharing -->
+                    </div>
+                </div>
+                <!-- author info -->
+                <section class="post-author-info">
+                    <h3 class="section-heading sr-only">About The Author</h3>
+                    <div class="media">
+                        <a href="#" class="media-left">
+                            <img src="{% static 'p1/assets/img/avatar-placeholder.jpg' %}" width="50" height="50" alt="Avatar">
+                        </a>
+                        <div class="media-body">
+                            <a href="#" class="author-name">Abebe Kebede</a>
+                            <p class="author-title">Electrical Engineer</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- end author info -->
+                <!-- related post -->
+                <section class="related-posts">
+                    <h3 class="section-heading">Related Articles</h3>
+                    <ul class="list-unstyled related-post-list row">
+                        <li class="col-md-4">
+                            <a href="#">
+                                <img src="{% static 'p1/assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Related Post">
+                            </a>
+                            <a href="#" class="post-title">Replacing 'Made in China' with 'Made in Ethiopia'</a>
+                        </li>
+                        <li class="col-md-4">
+                            <a href="#">
+                                <img src="{% static 'p1/assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Related Post">
+                            </a>
+                            <a href="#" class="post-title">Electrical Cars in Ethiopia</a>
+                        </li>
+
+                        <li class="col-md-4">
+                            <a href="#">
+                                <img src="{% static 'p1/assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Related Post">
+                            </a>
+                            <a href="#" class="post-title">Top 5 Common Design Mistakes You Should Avoid</a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- end related post -->
+                <!-- comments -->
+                <article class="comments">
+                    <h3 class="section-heading">Comments (4)</h3>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a href="#" class="media-left">
+                                <img src="{% static 'p1/assets/img/avatar-placeholder.jpg' %}" class="avatar" alt="avatar">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading comment-author"><a href="#">Kebede Ababe</a></h4><span class="timestamp">May 28, 2016 12:30 PM</span>
+                                <p>{% lorem 30 w %}.</p>
+                                <p><a href="#"><i class="fa fa-reply"></i> Reply</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+                <button type="button" class="btn btn-default center-block">Load more comments</button>
+                <!-- end comments -->
+                <!-- comment form -->
+                <section class="comment-form margin-bottom">
+                    <h3 class="section-heading">Leave A Comment</h3>
+                    <p class="heading">Required fields are marked *. Your email will not be published or shared.</p>
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="control-label sr-only">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="control-label sr-only">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment" class="control-label sr-only">Your Commment</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="comment" name="comment" rows="5" cols="30" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!-- end comment form -->
+            </div>
+            <div class="col-md-3">
+                <!-- sidebar -->
+                <div class="sidebar">
+                   
+                    <div class="widget">
+                        <h4 class="widget-title">CATEGORIES</h4>
+                        <ul class="list-unstyled category-list">
+                            <li><a href="#">Design (23)</a></li>
+                            <li><a href="#">Projects (11)</a></li>
+                            <li><a href="#">Ideas (65)</a></li>
+                            <li><a href="#">Tips (17)</a></li>
+                            <li><a href="#">Tutorials (9)</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end sidebar -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT -->
+{% endblock content %}

@@ -5995,7 +5995,7 @@ html.fullscreen-bg #wrapper {
 }
 
 .fullscreen-image {
-  background-image: url('../img/hero-unit/building.png?1460972240');
+  background-image: url('../img/hero-unit/bg-bulb.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -6210,7 +6210,7 @@ html, body {
 }
 .navbar-default .navbar-nav > li > a {
   color: #3B3B3B;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 13px;
 }
 .navbar-default .navbar-nav > li > a:hover {

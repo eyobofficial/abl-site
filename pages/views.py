@@ -40,3 +40,21 @@ class ContactView1(TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context['page'] = 'contact'
         return context
+
+
+class BlogsView1(TemplateView):
+    template_name = 'p1/blogs.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['page'] = 'blogs'
+        return context
+
+
+class BlogDetailView1(TemplateView):
+    template_name = 'p1/blog-detail.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['page'] = 'blogs'
+        return context
