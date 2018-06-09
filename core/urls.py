@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('blogs/', include('blogs.urls')),
     path('', include('pages.urls')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# Customize default admin title
+admin.site.site_title = 'Admin - ABL Enginnering'
+admin.site.site_header = 'Admin - ABL Enginnering'
