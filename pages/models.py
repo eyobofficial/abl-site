@@ -7,11 +7,13 @@ class Base(models.Model):
     """
     created_at = models.DateTimeField(
         'Created Date',
+        null=True, blank=True,
         auto_now_add=True,
         help_text='Record first created date and time'
     )
     updated_at = models.DateTimeField(
         'Last Modified',
+        null=True, blank=True,
         auto_now=True,
         help_text='Record last modified date and time'
     )
@@ -39,15 +41,15 @@ class Brand(Base):
         upload_to='fevicon/',
         null=True, blank=True,
     )
-    story = models.TextField('Background story')
-    who = models.TextField('Who we are')
-    what = models.TextField('What we do')
+    story = models.TextField('Background story', blank=True)
+    who = models.TextField('Who we are', blank=True)
+    what = models.TextField('What we do', blank=True)
     service_description = models.TextField('Service description', blank=True)
     contact_description = models.TextField('Contact description', blank=True)
-    address = models.TextField('Compay address')
-    phone1 = models.CharField(max_length=30)
+    address = models.TextField('Compay address', blank=True)
+    phone1 = models.CharField(max_length=30, blank=True)
     phone2 = models.CharField(max_length=30, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
     linkedin = models.URLField(blank=True)
@@ -132,7 +134,8 @@ class Testimonial(Base):
     )
     rating = models.PositiveIntegerField(choices=RATING_CHOICE_OPTIONS)
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField('Testimonial')
+    quote = models.TextField(max_length=255)
     featured = models.BooleanField(default=False)
 
     class Meta:
