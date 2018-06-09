@@ -82,6 +82,22 @@ class Widget(Base):
         return self.title
 
 
+class Staff(Base):
+    """
+    Models team staff
+    """
+    name = models.CharField('Full name', max_length=255)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    picture = models.ImageField(
+        upload_to='staff/',
+        blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Service(Base):
     """
     Models provided services
