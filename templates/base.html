@@ -7,12 +7,12 @@
 	<meta name="description" content="">
 	<meta name="author" content="Eyob Tariku">
 	<!-- CORE CSS -->
-	<link href="{% static 'p1/assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-	<link href="{% static 'p1/assets/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css' %}">
-	<link href="{% static 'p1/assets/css/elegant-icons.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css' %}">
+	<link href="{% static 'assets/css/elegant-icons.css' %}" rel="stylesheet" type="text/css">
 	<!-- THEME CSS -->
-	<link href="{% static 'p1/assets/css/main.css' %}" rel="stylesheet" type="text/css">
-	<link href="{% static 'p1/assets/css/my-custom-styles.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/main.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'assets/css/my-custom-styles.css' %}" rel="stylesheet" type="text/css">
 	<!-- GOOGLE FONTS -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway:700,400,400italic,500' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300,300italic' rel='stylesheet' type='text/css'>
@@ -66,7 +66,7 @@
 					<i class="fa fa-bars"></i>
 				</button>
 				<a href="{% url 'pages:p1-home' %}" class="navbar-brand">
-					<!-- <img src="{% static 'p1/assets/img/logo/bravana-lite-logo.png' %}" alt="ABL Logo">  --> <span class="text-green">ABL</span> ENGINEERING
+					<!-- <img src="{% static 'assets/img/logo/bravana-lite-logo.png' %}" alt="ABL Logo">  --> <span class="text-green">ABL</span> ENGINEERING
 				</a>
 				<div id="main-nav-collapse" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav main-navbar-nav">
@@ -81,7 +81,7 @@
 								<li><a href="#">Page 3</a></li>
 							</ul>
 						</li>
-						<li><a href="{% url 'pages:p1-blogs' %}">BLOGS</a></li>
+						<li><a href="{% url 'blogs:blog-list' %}">BLOGS</a></li>
 						<li><a href="{% url 'pages:p1-contact' %}">CONTACT</a></li>
 					</ul>
 				</div>
@@ -96,7 +96,7 @@
 					<i class="fa fa-bars"></i>
 				</button>
 				<a href="{% url 'pages:p1-home' %}" class="navbar-brand">
-					<!-- <img src="{% static 'p1/assets/img/logo/bravana-lite-logo.png' %}" alt="ABL Logo"> -->
+					<!-- <img src="{% static 'assets/img/logo/bravana-lite-logo.png' %}" alt="ABL Logo"> -->
 					<span class="text-green">ABL</span> ENGINEERING
 				</a>
 				<div id="main-nav-collapse" class="collapse navbar-collapse">
@@ -112,7 +112,7 @@
 								<li><a href="page-contact.html">Page 2</a></li>
 							</ul>
 						</li>
-						<li {% if page == 'blogs' %}class="active"{% endif %}><a href="{% url 'pages:p1-blogs' %}">BLOGS</a></li>
+						<li {% if page == 'blogs' %}class="active"{% endif %}><a href="{% url 'blogs:blog-list' %}">BLOGS</a></li>
 						<li {% if page == 'contact' %}class="active"{% endif %}><a href="{% url 'pages:p1-contact' %}">CONTACT</a></li>
 					</ul>
 				</div>
@@ -158,12 +158,12 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- JAVASCRIPT -->
-	<script src="{% static 'p1/assets/js/jquery-2.1.1.min.js' %}"></script>
-	<script src="{% static 'p1/assets/js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'p1/assets/js/plugins/easing/jquery.easing.min.js' %}"></script>
-	<script src="{% static 'p1/assets/js/plugins/morphext/morphext.min.js' %}"></script>
-	<script src="{% static 'p1/assets/js/plugins/owl-carousel/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'p1/assets/js/bravana-lite.js' %}"></script>
+	<script src="{% static 'assets/js/jquery-2.1.1.min.js' %}"></script>
+	<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'assets/js/plugins/easing/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'assets/js/plugins/morphext/morphext.min.js' %}"></script>
+	<script src="{% static 'assets/js/plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'assets/js/bravana-lite.js' %}"></script>
 </body>
 
 </html>
