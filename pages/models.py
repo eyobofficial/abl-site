@@ -51,7 +51,10 @@ class Brand(Base):
     facebook = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
     linkedin = models.URLField(blank=True)
-    keywords = models.TextField(blank=True)
+    keywords = models.TextField(
+        blank=True,
+        help_text='Comma separated keywords. Ex: abl, electrical, consulting, '
+    )
     description = models.TextField(blank=True)
 
     def __str__(self):
