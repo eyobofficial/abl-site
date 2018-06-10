@@ -1,16 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
+
+from . import models
 
 
 class IndexView(TemplateView):
     template_name = 'pages/index.html'
 
-
-class HomeView1(TemplateView):
-    template_name = 'pages/home.html'
-
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
+        context['brand'] = get_object_or_404(models.Brand, pk=1)
         context['page'] = 'home'
         return context
 
