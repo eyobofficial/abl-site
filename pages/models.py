@@ -79,7 +79,7 @@ class Widget(Base):
     """
     title = models.CharField(max_length=60)
     sub_title = models.TextField(max_length=255)
-    icon = models.CharField(max_length=255)
+    icon = models.TextField()
     link_title = models.CharField(max_length=60)
     link_url = models.CharField(max_length=60)
 
@@ -110,6 +110,7 @@ class Service(Base):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=255)
     description = models.TextField()
+    featured = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -151,6 +152,7 @@ class Client(Base):
     """
     title = models.CharField('Client name', max_length=255)
     logo = models.ImageField(upload_to='clients/logo/')
+    link = models.URLField('Client webiste link', blank=True)
     featured = models.BooleanField(default=False)
 
     class Meta:
@@ -158,3 +160,18 @@ class Client(Base):
 
     def __str__(self):
         return self.title
+
+
+class Subscriber(Base):
+    """
+    Models a subscriber
+    """
+    email = models.EmailField()
+
+    class Meta:
+        verbose_name = 'Email subscriber'
+        verbose_name_plural = 'Email subscribers'
+        ordering = ['-created_at', 'email', ]
+
+    def __str__(self):
+        return self.email

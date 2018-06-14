@@ -7,7 +7,12 @@
 <section class="hero-unit hero-fullscreen-bg fullscreen-image hero-rotating-words">
     <div class="container">
         <div class="left">
-            <p class="lead"><span id="rotating-words" class="rotating-words">Premium Quality Work, Value For Your Money, For Your Projects With Deadlines</span></p>
+            <p class="lead">
+                <span id="rotating-words" class="rotating-words">
+                {% for slide in slide_list %}
+                    {{ slide.title }}{% if forloop.counter < slide_list.count %}, {% endif %}
+                {% endfor %}
+            </p>
             <span class="scroll-down"><a href="#page-content" class="btn btn-lg btn-primary">LEARN MORE</a></span>
         </div>
     </div>
@@ -23,32 +28,16 @@
 <section class="no-padding-bottom">
     <div class="container">
         <div class="row icon-info-group">
-            <div class="col-md-4">
-                <div class="icon-info icon-info-center">
-                    <i class="icon icon_easel ico-styled-md"></i>
-                    <h3 class="title">Reliable</h3>
-                    <p>{% lorem 8 w random %}</p>
-                    <a href="#" class="more">About Us <i class="fa fa-angle-right"></i></a>
+            {% for widget in widget_list %}
+                <div class="col-md-4">
+                    <div class="icon-info icon-info-center">
+                        {% autoescape off %}{{ widget.icon }}{% endautoescape %}
+                        <h3 class="title">{{ widget.title }}</h3>
+                        <p>{{ widget.sub_title }}</p>
+                        <a href="{{ widget.link_url }}" class="more">{{ widget.link_title }} <i class="fa fa-angle-right"></i></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-center">
-                    <i class="icon icon_star ico-styled-md"></i>
-                    <i class="icon icon_star ico-styled-md"></i>
-                    <i class="icon icon_star ico-styled-md"></i>
-                    <h3 class="title">Premium Quality</h3>
-                    <p>{% lorem 8 w random %}</p>
-                    <a href="#" class="more">Our Services <i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-center">
-                    <i class="icon icon_group ico-styled-md"></i>
-                    <h3 class="title">Long term Parternship</h3>
-                    <p>{% lorem 8 w random %}</p>
-                    <a href="#" class="more">Contact Us Now<i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -57,7 +46,7 @@
 <section>
     <div class="container">
         <h2 class="section-heading">Background Story <i class="fa fa-star"></i></h2>
-        {% lorem 2 p %}
+        {{ brand.story }}
     </div>
 </section>
 <!-- END STORY -->
@@ -66,60 +55,19 @@
     <div class="container">
         <h2 class="section-heading">What We Do</h2>
         <div class="row">
+            {% for service in service_list %}
             <div class="col-md-4">
                 <div class="icon-info icon-info-left">
-                    <i class="icon icon_pencil ico-styled-md text-primary"></i>
+                    {% autoescape off %}
+                    {{ service.icon }}
+                    {% endautoescape %}
                     <div class="text">
-                        <h2 class="title">ELECTRICAL DESIGN</h2>
-                        <p>{% lorem 18 w %}.</p>
+                        <h2 class="title">{{ service.title }}</h2>
+                        <p>{{ service.description }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-left">
-                    <i class="icon icon_lightbulb ico-styled-md text-primary"></i>
-                    <div class="text">
-                        <h2 class="title">CONSULTING SERVICE</h2>
-                        <p>{% lorem 18 w %}.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-left">
-                    <i class="icon icon_datareport ico-styled-md text-primary"></i>
-                    <div class="text">
-                        <h2 class="title">PROJECT SUPERVISION</h2>
-                        <p>{% lorem 18 w %}..</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-left no-margin-bottom">
-                    <i class="icon icon_like ico-styled-md text-primary"></i>
-                    <div class="text">
-                        <h2 class="title">ANOTHER SERVICE</h2>
-                        <p>{% lorem 18 w %}.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-left no-margin-bottom">
-                    <i class="icon icon_ul ico-styled-md text-primary"></i>
-                    <div class="text">
-                        <h2 class="title">ANOTHER SERVICE</h2>
-                        <p>{% lorem 18 w %}.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="icon-info icon-info-left no-margin-bottom">
-                    <i class="icon icon_genius ico-styled-md text-primary"></i>
-                    <div class="text">
-                        <h2 class="title">MORE SERVICES</h2>
-                        <p>{% lorem 18 w %}</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -130,30 +78,20 @@
     <div class="container">
         <h2 class="sr-only">Testimonials</h2>
         <div id="testimonial-standard-carousel" class="testimonial-carousel testimonial-standard-carousel owl-carousel">
+            {% for testimonial in testimonial_list %}
             <div class="testimonial-standard">
-                <p class="content">"{% lorem 10 w random %}"</p>
+                <p class="content">"{{ testimonial.quote }}"</p>
                 <div class="author">
+                    {% if testimonial.picture %}
+                    <img src="{{ testimonial.picture.url }}" class="img-circle" alt="Avatar">
+                    {% else %}
                     <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Abebe Kebede</span>
-                    <span class="title text-muted-2x">Owner Some Company</span>
+                    {% endif %}
+                    <span class="name">{{ testimonial.client }}</span>
+                    <span class="title text-muted-2x">{{ testimonial.position }}</span>
                 </div>
             </div>
-            <div class="testimonial-standard">
-                <p class="content">"{% lorem 10 w random %}"</p>
-                <div class="author">
-                    <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Almaz Kebede</span>
-                    <span class="title text-muted-2x">Managing Director of Xyz Firm</span>
-                </div>
-            </div>
-            <div class="testimonial-standard">
-                <p class="content">"{% lorem 10 w random %}"</p>
-                <div class="author">
-                    <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle" alt="Avatar">
-                    <span class="name">Eyob Tariku</span>
-                    <span class="title text-muted-2x">Esteemed Customer</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -164,21 +102,11 @@
         <h2 class="sr-only">OUR CLIENTS</h2>
         <p class="text-center">We have been trusted by big companies below</p>
         <ul class="list-inline list-logo">
+            {% for client in client_list %}
             <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo1.png' %}" alt="logo"></a>
+                <a href="{{ client.link }}"><img src="{{ client.logo.url }}" alt="{{ client.title }}" title="{{ client.title }}"></a>
             </li>
-            <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo2.png' %}" alt="logo"></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo3.png' %}" alt="logo"></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo4.png' %}" alt="logo"></a>
-            </li>
-            <li>
-                <a href="#"><img src="{% static 'assets/img/clients/logo5.png'%}" alt="logo"></a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </section>

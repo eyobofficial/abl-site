@@ -24,16 +24,25 @@ class StaffAdmin(admin.ModelAdmin):
 
 @admin.register(models.Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'updated_at', ]
+    list_display = ['title', 'updated_at', 'featured', ]
+    list_filter = ['featured', ]
 
 
 @admin.register(models.Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ['client', 'position', 'title', 'featured', 'updated_at', ]
+    list_display = [
+        'client', 'position', 'title',
+        'featured', 'updated_at', 'featured',
+    ]
     list_filter = ['featured', ]
 
 
 @admin.register(models.Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ['title', 'featured', 'updated_at', ]
+    list_display = ['title', 'featured', 'updated_at', 'featured', ]
     list_filter = ['featured', ]
+
+
+@admin.register(models.Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ['email', 'created_at']
