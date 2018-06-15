@@ -8,9 +8,8 @@
     <div class="container">
         <h1 class="page-title">ABOUT US</h1>
         <ol class="breadcrumb link-accent">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{% url 'pages:index' %}">Home</a></li>
+            <li><a href="">About</a></li>
         </ol>
     </div>
 </div>
@@ -23,11 +22,11 @@
             <div class="row">
                 <div class="col-md-7">
                     <h2 class="section-heading">WHO WE ARE</h2>
-                    {% lorem 2 p %}
+                    {{ brand.who }}
                 </div>
                 <div class="col-md-5">
                     <h2 class="section-heading">WHAT WE DO</h2>
-                    {% lorem 1 p %}
+                    {{ brand.what }}
                 </div>
             </div>
         </div>
@@ -37,57 +36,37 @@
     <section>
         <div class="container">
             <h2 class="section-heading">OUR TEAM</h2>
-            <p class="margin-bottom-30">{% lorem 40 w %}</p>
+            <p class="margin-bottom-30">{{ brand.team_description }}</p>
             <div class="row">
+                {% for staff in staff_list %}
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="{% static 'assets/img/team/team-avatar-placeholder.jpg' %}" class="img-responsive" alt="Person">
+                        {% if staff.picture %}
+                        <img src="{{ staff.picture.url }}" class="img-responsive" alt="{{ staff.name }}">
+                        {% else %}
+                        <img src="{% static 'assets/img/team/team-avatar-placeholder.jpg' %}" class="img-responsive" alt="{{ staff.name }}">
+                        {% endif %}
                         <div class="member-info">
-                            <h3 class="name">Abebe Kebede</h3>
-                            <span class="title">Electrical Engineer</span>
-                            <p class="short-bio">{% lorem 17 w random %}.</p>
+                            <h3 class="name">{{ staff.name }}</h3>
+                            <span class="title">{{ staff.title }}</span>
+                            <p class="short-bio">{{ staff.description }}</p>
                             <ul class="list-inline social-icons social-icons-small">
-                                <li><a href="#" class="facebook-bg-hover"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="dribbble-bg-hover"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#" class="linkedin-bg-hover"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#" class="twitter-bg-hover"><i class="fa fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="{% static 'assets/img/team/team-avatar-placeholder.jpg' %}" class="img-responsive" alt="Person">
-                        <div class="member-info">
-                            <h3 class="name">Eyob Tariku</h3>
-                            <span class="title">Civil Engineer</span>
-                            <p class="short-bio">{% lorem 17 w random %}.</p>
-                            <ul class="list-inline social-icons social-icons-small social-icons-square">
-                                <li><a href="#" class="facebook-bg-hover"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="dribbble-bg-hover"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#" class="linkedin-bg-hover"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#" class="twitter-bg-hover"><i class="fa fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                                {% if staff.facebook %}
+                                <li><a href="{{ staff.facebook }}" class="facebook-bg-hover"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
 
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="{% static 'assets/img/team/team-avatar-placeholder.jpg' %}" class="img-responsive" alt="Person">
-                        <div class="member-info">
-                            <h3 class="name">John Doe</h3>
-                            <span class="title">Draft Person</span>
-                            <p class="short-bio">{% lorem 17 w random %}.</p>
-                            <ul class="list-inline social-icons social-icons-small social-icons-square">
-                                <li><a href="#" class="facebook-bg-hover"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="dribbble-bg-hover"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#" class="linkedin-bg-hover"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#" class="twitter-bg-hover"><i class="fa fa-twitter"></i></a></li>
+                                {%  if staff.lindedin %}
+                                <li><a href="{{ staff.lindedin }}" class="linkedin-bg-hover"><i class="fa fa-linkedin"></i></a></li>
+                                {% endif %}
+
+                                {% if staff.twitter %}
+                                <li><a href="{{ staff.twitter }}" class="twitter-bg-hover"><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
-                </div>        
+                </div>
+                {% endfor %}       
             </div>
         </div>
     </section>
@@ -97,21 +76,11 @@
         <div class="container">
             <h2 class="section-heading">OUR CLIENTS</h2>
             <ul class="list-inline list-logo">
+                {% for client in client_list %}
                 <li>
-                    <a href="#"><img src="{% static 'assets/img/clients/logo1.png' %}" alt="logo"></a>
+                    <a href="{{ client.link }}"><img src="{{ client.logo.url }}" alt="{{ client.title }}" title="{{ client.title }}"></a>
                 </li>
-                <li>
-                    <a href="#"><img src="{% static 'assets/img/clients/logo2.png' %}" alt="logo"></a>
-                </li>
-                <li>
-                    <a href="#"><img src="{% static 'assets/img/clients/logo3.png' %}" alt="logo"></a>
-                </li>
-                <li>
-                    <a href="#"><img src="{% static 'assets/img/clients/logo4.png' %}" alt="logo"></a>
-                </li>
-                <li>
-                    <a href="#"><img src="{% static 'assets/img/clients/logo5.png' %}" alt="logo"></a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </section>

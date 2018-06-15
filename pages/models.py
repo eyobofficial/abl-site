@@ -44,6 +44,7 @@ class Brand(Base):
     story = models.TextField('Background story', blank=True)
     who = models.TextField('Who we are', blank=True)
     what = models.TextField('What we do', blank=True)
+    team_description = models.TextField('Team description', blank=True)
     service_description = models.TextField('Service description', blank=True)
     contact_description = models.TextField('Contact description', blank=True)
     address = models.TextField('Compay address', blank=True)
@@ -58,6 +59,10 @@ class Brand(Base):
         help_text='Comma separated keywords. Ex: abl, electrical, consulting, '
     )
     description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Company'
+        verbose_name_plural = 'Company'
 
     def __str__(self):
         return self.title
@@ -94,9 +99,13 @@ class Staff(Base):
     name = models.CharField('Full name', max_length=255)
     title = models.CharField(max_length=255)
     description = models.TextField()
+    facebook = models.URLField('Facebook link', blank=True)
+    twitter = models.URLField('Twitter link', blank=True)
+    Linkedin = models.URLField('Linkedin link', blank=True)
     picture = models.ImageField(
         upload_to='staff/',
-        blank=True, null=True
+        blank=True, null=True,
+        help_text='Recommended picture size is 400x499 pixels'
     )
 
     def __str__(self):
@@ -144,6 +153,18 @@ class Testimonial(Base):
 
     def __str__(self):
         return self.title
+
+    def get_stars(self, *args, **kwargs):
+        i = 1
+        stars = []
+        while i <= 5:
+            if i <= self.rating:
+                stars.append('*')
+            else:
+                stars.append('')
+            i += 1
+
+        return stars
 
 
 class Client(Base):

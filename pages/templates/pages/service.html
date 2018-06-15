@@ -8,9 +8,8 @@
     <div class="container">
         <h1 class="page-title">OUR SERVICES</h1>
         <ol class="breadcrumb link-accent">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Pages</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{% url 'pages:index' %}">Home</a></li>
+            <li><a href="">Services</a></li>
         </ol>
     </div>
 </div>
@@ -21,62 +20,21 @@
     <section>
         <div class="container">
             <h2 class="section-heading">We Provide The Best Services</h2>
-            {% lorem 1 p %}
+            {{ brand.service_description }}
             <div class="row margin-top-50">
+                {% for service in service_list %}
                 <div class="col-md-4">
                     <div class="icon-info icon-info-left">
-                        <i class="icon icon_pencil ico-styled-md text-primary"></i>
+                        {% autoescape off %}
+                        {{ service.icon }}
+                        {% endautoescape %}
                         <div class="text">
-                            <h2 class="title">ELECTRICAL DESIGN</h2>
-                            <p>{% lorem 18 w %}.</p>
+                            <h2 class="title">{{ service.title }}</h2>
+                            <p>{{ service.description }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="icon-info icon-info-left">
-                        <i class="icon icon_lightbulb ico-styled-md text-primary"></i>
-                        <div class="text">
-                            <h2 class="title">CONSULTING SERVICE</h2>
-                            <p>{% lorem 18 w %}.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-info icon-info-left">
-                        <i class="icon icon_datareport ico-styled-md text-primary"></i>
-                        <div class="text">
-                            <h2 class="title">PROJECT SUPERVISION</h2>
-                            <p>{% lorem 18 w %}..</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-info icon-info-left no-margin-bottom">
-                        <i class="icon icon_like ico-styled-md text-primary"></i>
-                        <div class="text">
-                            <h2 class="title">ANOTHER SERVICE</h2>
-                            <p>{% lorem 18 w %}.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-info icon-info-left no-margin-bottom">
-                        <i class="icon icon_ul ico-styled-md text-primary"></i>
-                        <div class="text">
-                            <h2 class="title">ANOTHER SERVICE</h2>
-                            <p>{% lorem 18 w %}.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-info icon-info-left no-margin-bottom">
-                        <i class="icon icon_genius ico-styled-md text-primary"></i>
-                        <div class="text">
-                            <h2 class="title">MORE SERVICES</h2>
-                            <p>{% lorem 18 w %}</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -86,65 +44,33 @@
         <div class="container">
             <h2 class="section-heading">What Our Clients Say</h2>
             <div class="row">
+                {% for testimonial in testimonal_list %}
                 <div class="col-md-6">
                     <div class="testimonial-rating">
-                        <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle avatar" alt="avatar">
+                        {% if testimonail.picture %}
+                        <img src="{{ testimonail.picture.url }}" class="img-circle avatar" alt="{{ testimonail.client }}">
+                        {% else %}
+                         <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle avatar" alt="{{ testimonail.client }}">
+                        {% endif %}
                         <div class="text">
-                            <strong class="name">Abebe Kebede</strong>
+                            <strong class="name">{{ testimonial.client }}</strong>
                             <span class="rating">
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i></span>
-                            <h4 class="title">Awesome!</h4>
+                                {% for star in testimonial.get_stars %}
+                                    {% if star == '*' %}
+                                    <i class="fa fa-star"></i>
+                                    {% else %}
+                                    <i class="fa fa-star-o"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                            <h4 class="title">{{ testimonial.title }}</h4>
                             <p class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, reprehenderit eum suscipit, nostrum quos ut exercitationem, consequuntur facilis illum obcaecati provident rem perferendis itaque asperiores maiores iusto sapiente in. Distinctio.
+                                {{ testimonial.description }}
                             </p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="testimonial-rating">
-                        <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle avatar" alt="avatar">
-                        <div class="text">
-                            <strong class="name">Kebede Abebe</strong>
-                            <span class="rating">
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i></span>
-                            <h4 class="title">It was worth it</h4>
-                            <p class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, reprehenderit eum suscipit, nostrum quos ut exercitationem, consequuntur facilis illum obcaecati provident rem perferendis itaque asperiores maiores iusto sapiente in. Distinctio.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="testimonial-rating">
-                        <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle avatar" alt="avatar">
-                        <div class="text">
-                            <strong class="name">Almaz Abebe</strong>
-                            <span class="rating">
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i></span>
-                            <h4 class="title">Thank You So Much!</h4>
-                            <p class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, reprehenderit eum suscipit, nostrum quos ut exercitationem, consequuntur facilis illum obcaecati provident rem perferendis itaque asperiores maiores iusto sapiente in. Distinctio.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="testimonial-rating">
-                        <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="img-circle avatar" alt="avatar">
-                        <div class="text">
-                            <strong class="name">John Doe</strong>
-                            <span class="rating">
-                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-full"></i></span>
-                            <h4 class="title">Value for Money</h4>
-                            <p class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, reprehenderit eum suscipit, nostrum quos ut exercitationem, consequuntur facilis illum obcaecati provident rem perferendis itaque asperiores maiores iusto sapiente in. Distinctio.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
