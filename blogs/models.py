@@ -30,6 +30,20 @@ class Base(models.Model):
         get_latest_by = ['-updated_at', ]
 
 
+class Author(Base):
+    full_name = models.CharField(max_length=120)
+    title = models.CharField(max_length=120)
+    email = models.EmailField()
+    bio = models.TextField('Short bio', blank=True)
+    avatar = models.ImageField(upload_to='authors/', blank=True, null=True)
+
+    class Meta:
+        ordering = ['full_name', ]
+
+    def __str__(self):
+        return self.name
+
+
 class Catagory(Base):
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
@@ -65,6 +79,11 @@ class Post(Base):
         ('draft', 'Draft'),
         ('published', 'Published')
     )
+    author = models.ForeignKey(
+        Author,
+        related_name='posts',
+        null=True, on_delete=models.SET_NULL
+    )
     catagory = models.ForeignKey(
         Catagory,
         related_name='posts',
@@ -96,3 +115,24 @@ class Post(Base):
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('blogs:post-detail', args=[str(self.pk), self.slug])
+
+
+class Comment(Base):
+    post = models.ForeignKey(
+        Post,
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
+    full_name = models.CharField(max_length=120)
+    email = models.EmailField()
+    content = models.TextField('Comment')
+    upvotes = models.PositiveIntegerField(default=0)
+    downvotes = models.PositiveIntegerField(default=0)
+    is_approved = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-post', '-updated_at', ]
+        get_latest_by = ['-updated_at', ]
+
+    def __str__(self):
+        return '{} comment on {}'.format(self.full_name, self.post)
