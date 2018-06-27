@@ -27,5 +27,5 @@ urlpatterns = [
 
 
 # Customize default admin title
-admin.site.site_title = 'Admin - ABL Enginnering'
-admin.site.site_header = 'Admin - ABL Enginnering'
+admin.site.site_title = 'Admin - ABL Electrical Enginnering'
+admin.site.site_header = 'Admin - ABL Electrical Enginnering'
