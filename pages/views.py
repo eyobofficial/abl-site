@@ -1,7 +1,9 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 from django.views.generic import TemplateView
 
 from . import models
+from . import forms
 
 
 class IndexView(TemplateView):
@@ -53,3 +55,19 @@ class ContactView(TemplateView):
         context['brand'] = get_object_or_404(models.Brand, pk=1)
         context['page'] = 'contact'
         return context
+
+
+def subscribe(request):
+    redirect_url = request.POST.get('next', '/')
+    redirect_url += '#page-footer'
+
+    if request.method == 'POST':
+        form = forms.SubscriberForm(request.POST)
+        messages.success(
+            request,
+            'Thank you for subscribing to our news and latest blogs!'
+        )
+
+        if form.is_valid():
+            form.save()
+    return redirect(redirect_url)

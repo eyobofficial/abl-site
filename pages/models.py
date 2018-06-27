@@ -187,7 +187,7 @@ class Subscriber(Base):
     """
     Models a subscriber
     """
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
 
     class Meta:
         verbose_name = 'Email subscriber'
