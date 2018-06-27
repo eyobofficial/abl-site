@@ -9,7 +9,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 @admin.register(models.Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'title', '-updated_at', )
+    list_display = ('full_name', 'title', 'updated_at', )
     search_fields = ('full_name', 'title', 'bio', )
 
 

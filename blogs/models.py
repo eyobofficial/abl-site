@@ -41,7 +41,7 @@ class Author(Base):
         ordering = ['full_name', ]
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
 
 class Catagory(Base):
