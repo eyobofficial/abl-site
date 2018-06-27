@@ -116,7 +116,7 @@
 					<p class="copytext">Subscribe here to get the latest news and updates about our services.
 					{% for message in messages %}
 						{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-						 <p class="text-success">{{ message }}</p>
+						 <p class="text-success"><i class="fa fa-check-circle"></i> {{ message }}</p>
 						{% endif %}
 					{% endfor %}
 					<form class="newsletter-form" method="POST" action="{% url 'pages:subscribe' %}">
