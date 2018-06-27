@@ -8,7 +8,7 @@
 	<meta name="author" content="Eyob Tariku">
 	<!-- CORE CSS -->
 	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-	<link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css' %}">
+	<link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
 	<link href="{% static 'assets/css/elegant-icons.css' %}" rel="stylesheet" type="text/css">
 	<!-- THEME CSS -->
 	<link href="{% static 'assets/css/main.css' %}" rel="stylesheet" type="text/css">
@@ -22,7 +22,10 @@
 	<link rel="">
 	<link rel="apple-touch-icon-precomposed" href="">
 	<link rel="shortcut icon" href="">
+
+	<!--
 	<script src="https://use.fontawesome.com/e770b12ff4.js"></script>
+	-->
 
 	<style>
 		.hero-fullscreen-bg .container {
@@ -74,7 +77,7 @@
 						<li class="active"><a href="{% url 'pages:index' %}">HOME</a></li>
 						<li><a href="{% url 'pages:about' %}">ABOUT</a></li>
 						<li><a href="{% url 'pages:service' %}">SERVICES</a></li>
-						<li><a href="{% url 'blogs:blog-list' %}">BLOGS</a></li>
+						<li><a href="{% url 'blogs:post-list' %}">BLOGS</a></li>
 						<li><a href="{% url 'pages:contact' %}">CONTACT</a></li>
 					</ul>
 				</div>
@@ -97,7 +100,7 @@
 						<li><a href="{% url 'pages:index' %}">HOME</a></li>
 						<li {% if page == 'about' %}class="active"{% endif %}><a href="{% url 'pages:about' %}">ABOUT</a></li>
 						<li {% if page == 'service' %}class="active"{% endif %}><a href="{% url 'pages:service' %}">SERVICE</a></li>
-						<li {% if page == 'blogs' %}class="active"{% endif %}><a href="{% url 'blogs:blog-list' %}">BLOGS</a></li>
+						<li {% if page == 'blogs' %}class="active"{% endif %}><a href="{% url 'blogs:post-list' %}">BLOGS</a></li>
 						<li {% if page == 'contact' %}class="active"{% endif %}><a href="{% url 'pages:contact' %}">CONTACT</a></li>
 					</ul>
 				</div>

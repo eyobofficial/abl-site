@@ -1,7 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.conf import settings
 from django.urls import reverse
+
+
+class PostManager(models.Manager):
+    def published(self, *args, **kwargs):
+        return self.get_queryset().filter(status='published')
+
+    def draft(self, *args, **kwargs):
+        return self.get_queryset().filter(status='draft')
+
+    def popular(self, *args, **kwargs):
+        return self.published().order_by('-read_count')
 
 
 class CustomUser(AbstractUser):
@@ -52,7 +62,7 @@ class Catagory(Base):
     class Meta:
         verbose_name = 'Catagory'
         verbose_name_plural = 'Catagories'
-        get_latest_by = ['-updated_at', ]
+        get_latest_by = ['-created_at', '-updated_at', ]
         ordering = ['title', ]
 
     def __str__(self):
@@ -67,7 +77,7 @@ class Tag(Base):
     slug = models.SlugField(unique=True)
 
     class Meta:
-        get_latest_by = ['-updated_at', ]
+        get_latest_by = ['-created_at', '-updated_at', ]
         ordering = ['title', ]
 
     def __str__(self):
@@ -105,16 +115,24 @@ class Post(Base):
         related_name='posts',
     )
     open_for_comment = models.BooleanField(default=True)
+    read_count = models.PositiveIntegerField(default=1)
+
+    # Managers
+    objects = PostManager()
 
     class Meta:
-        ordering = ['-updated_at', ]
-        get_latest_by = ['-updated_at', ]
+        ordering = ['-created_at', '-updated_at', 'title', ]
+        get_latest_by = ['-created_at', ]
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('blogs:post-detail', args=[str(self.pk), self.slug])
+
+    def update_read_count(self):
+        self.read_count += 1
+        self.save()
 
 
 class Comment(Base):
@@ -131,8 +149,8 @@ class Comment(Base):
     is_approved = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-post', '-updated_at', ]
-        get_latest_by = ['-updated_at', ]
+        ordering = ['-post', '-created_at', ]
+        get_latest_by = ['-created_at', ]
 
     def __str__(self):
         return '{} comment on {}'.format(self.full_name, self.post)

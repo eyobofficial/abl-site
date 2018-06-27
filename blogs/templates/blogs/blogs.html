@@ -9,53 +9,27 @@
             <div class="col-md-8 col-lg-9">
                 <section class="no-padding-top">
                     <div class="row">
+                        {% for post in post_list %}
                         <div class="col-sm-6">
                             <div class="post-entry-card">
-                                <a href="#"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
+                                <a href="{{ post.get_absolute_url }}">
+                                    {% if post.picture %}
+                                    <img src="{{ post.picture.url }}" class="img-responsive" alt="{{ post.title }}">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="{{ post.title }}">
+                                    {% endif %}
+                                </a>
                                 <div class="post-info">
-                                    <h3 class="post-title"><a href="#">Modern Electrical Design Practices</a></h3>
-                                    <p class="post-excerpt">{% lorem 20 w %}...</p>
-                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {% now 'M d, Y' %}</span>
-                                    <a href="{% url 'blogs:blog-detail' 2 %}" class="read-more pull-right">Read More</a>
+                                    <h3 class="post-title">
+                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                    </h3>
+                                    <p class="post-excerpt">{{ post.content|truncatewords:20 }}...</p>
+                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {{ post.created_at|date:'M d, Y' }}</span>
+                                    <a href="{{ post.get_absolute_url }}" class="read-more pull-right">Read More</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-sm-6">
-                            <div class="post-entry-card">
-                                <a href="#"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <div class="post-info">
-                                    <h3 class="post-title"><a href="#">10  Electrical Installation Tips</a></h3>
-                                    <p class="post-excerpt">{% lorem 20 w %}...</p>
-                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {% now 'M d, Y' %}</span>
-                                    <a href="{% url 'blogs:blog-detail' 2 %}" class="read-more pull-right">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <div class="post-entry-card">
-                                <a href="#"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <div class="post-info">
-                                    <h3 class="post-title"><a href="#">A Guide for Buying Durable Electrical Fixtures from Merkato</a></h3>
-                                    <p class="post-excerpt">{% lorem 20 w %}...</p>
-                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {% now 'M d, Y' %}</span>
-                                    <a href="{% url 'blogs:blog-detail' 2 %}" class="read-more pull-right">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="post-entry-card">
-                                <a href="#"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <div class="post-info">
-                                    <h3 class="post-title"><a href="#">Top 5 Common Design Mistakes You Should Avoid</a></h3>
-                                    <p class="post-excerpt">{% lorem 20 w %}...</p>
-                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {% now 'M d, Y' %}</span>
-                                    <a href="{% url 'blogs:blog-detail' 2 %}" class="read-more pull-right">Read More</a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </section>
                 <!-- end latest posts -->
@@ -63,36 +37,24 @@
                 <!-- categorized posts -->
                 <section class="categorized-posts">
                     <h2 class="section-heading pull-left">POPULAR</h2>
-                    <a href="#" class="see-all-posts pull-right">See all posts in Popular <i class="fa fa-long-arrow-right"></i></a>
                     <div class="clearfix"></div>
                     <div class="row">
+                        {% for post in popular_posts %}
                         <div class="col-sm-6 col-lg-3">
                             <div class="post-entry post-entry-simple">
-                                <a href="{% url 'blogs:blog-detail' 2 %}"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <h3 class="post-title"><a href="#">Electrical Cars in Ethiopia</a></h3>
+                                <a href="{{ post.get_absolute_url }}">
+                                    {% if post.thumbnail %}
+                                    <img src="{{ post.thumbnail.url }}" class="img-responsive" alt="{{ post.title }}">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="{{ post.title }}">
+                                    {% endif %}
+                                </a>
+                                <h3 class="post-title">
+                                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                </h3>
                             </div>
                         </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="post-entry post-entry-simple">
-                                <a href="{% url 'blogs:blog-detail' 2 %}"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <h3 class="post-title"><a href="#">How I learned to understand my clients</a></h3>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="post-entry post-entry-simple">
-                                <a href="{% url 'blogs:blog-detail' 2 %}"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <h3 class="post-title"><a href="#">The Future of Ethiopian Electrification</a></h3>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="post-entry post-entry-simple">
-                                <a href="{% url 'blogs:blog-detail' 2 %}"><img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="Post Thumbnail"></a>
-                                <h3 class="post-title"><a href="#">Replacing 'Made in China' with 'Made in Ethiopia'</a></h3>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </section>
                 <!-- end categorized posts -->
