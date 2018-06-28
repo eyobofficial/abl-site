@@ -69,7 +69,10 @@ class Catagory(Base):
         return self.title
 
     def get_absolute_url(self, *args, **kwargs):
-        return reverse('blogs:post-detail', args=[self.slug, ])
+        return reverse('blogs:catagory-detail', args=[self.slug, ])
+
+    def post_count(self):
+        return self.posts.published().count()
 
 
 class Tag(Base):
