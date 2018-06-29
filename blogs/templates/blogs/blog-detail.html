@@ -6,9 +6,10 @@
 <div class="page-header breadcrumbs-only">
     <div class="container">
         <ol class="breadcrumb link-accent">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Blog</a></li>
-            <li class="active">Post</li>
+            <li><a href="{% url 'pages:index' %}">Home</a></li>
+            <li><a href="{% url 'blogs:post-list' %}">Blogs</a></li>
+            <li><a href="{{ post.catagory.get_absolute_url }}">{{ post.catagory.title }}</a></li>
+            <li class="active">{{ post.title }}</li>
         </ol>
     </div>
 </div>
@@ -21,20 +22,23 @@
                 <!-- blog post -->
                 <article class="entry-post entry-post-single">
                     <header class="entry-header">
-                        <h1 class="entry-title">Modern Electrical Design Practices</h1>
+                        <h1 class="entry-title">{{ post.title }}</h1>
                         <div class="meta-line">
-                            <span class="post-author"><i class="fa fa-user"></i> <a href="#">Wosen</a></span>
-                            <span class="post-date"><i class="fa fa-calendar"></i> {% now 'M d, Y' %}</span>
-                            <span class="post-comment"><i class="fa fa-comments"></i> <a href="#">4 Comments</a></span>
+                            <span class="post-author"><i class="fa fa-user"></i> <a href="#">{{ post.author.full_name }}</a></span>
+                            <span class="post-date"><i class="fa fa-calendar"></i> {{ post.created_at|date:'M d, Y' }}</span>
+                            <span class="post-comment"><i class="fa fa-comments"></i> <a href="#">{{ post.approved_comments.count }} Comment{{ post.approved_comments.count|pluralize }}</a></span>
                         </div>
                     </header>
+
+                    {% if post.picture %}
                     <figure class="media">
-                        <a href="blog-post.html">
-                            <img src="{% static 'assets/img/blog/blog-placeholder.png' %}" alt="Image Thumbnail">
+                        <a href="#">
+                            <img src="{{ post.picture.url }}" alt="Image Thumbnail">
                         </a>
                     </figure>
+                    {% endif %}
                     <div class="content">
-                        {% lorem 5 p %}
+                        {{ post.content }}
                     </div>
                 </article>
                 <!-- end blog post -->
@@ -46,7 +50,6 @@
                             <ul class="list-inline social-icons social-icons-small">
                                 <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
                                 <li><a href="#" class="google-plus-bg"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
                         </div>
@@ -58,11 +61,15 @@
                     <h3 class="section-heading sr-only">About The Author</h3>
                     <div class="media">
                         <a href="#" class="media-left">
+                            {% if post.author.avatar %}
+                            <img src="{{ post.author.avatar.url }}" width="50" height="50" alt="Avatar">
+                            {% else %}
                             <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" width="50" height="50" alt="Avatar">
+                            {% endif %}
                         </a>
                         <div class="media-body">
-                            <a href="#" class="author-name">Abebe Kebede</a>
-                            <p class="author-title">Electrical Engineer</p>
+                            <a href="#" class="author-name">{{ post.author.full_name }}</a>
+                            <p class="author-title">{{ post.author.title }}</p>
                         </div>
                     </div>
                 </section>
@@ -95,18 +102,20 @@
                 <!-- end related post -->
                 <!-- comments -->
                 <article class="comments">
-                    <h3 class="section-heading">Comments (4)</h3>
+                    <h3 class="section-heading">Comment{{ post.approved_comments.count|pluralize }} ({{ post.approved_comments.count }})</h3>
                     <ul class="media-list">
+                        {% for comment in post.approved_comments %}
                         <li class="media">
                             <a href="#" class="media-left">
-                                <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="avatar" alt="avatar">
+                                <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="avatar" alt="{{ comment.full_name }}">
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading comment-author"><a href="#">Kebede Ababe</a></h4><span class="timestamp">May 28, 2016 12:30 PM</span>
+                                <h4 class="media-heading comment-author"><a href="#">{{ comment.full_name }}</a></h4><span class="timestamp">May 28, 2016 12:30 PM</span>
                                 <p>{% lorem 30 w %}.</p>
                                 <p><a href="#"><i class="fa fa-reply"></i> Reply</a></p>
                             </div>
                         </li>
+                        {% endfor %}
                     </ul>
                 </article>
                 <button type="button" class="btn btn-default center-block">Load more comments</button>
@@ -149,16 +158,9 @@
                 <!-- sidebar -->
                 <div class="sidebar">
                    
-                    <div class="widget">
-                        <h4 class="widget-title">CATEGORIES</h4>
-                        <ul class="list-unstyled category-list">
-                            <li><a href="#">Design (23)</a></li>
-                            <li><a href="#">Projects (11)</a></li>
-                            <li><a href="#">Ideas (65)</a></li>
-                            <li><a href="#">Tips (17)</a></li>
-                            <li><a href="#">Tutorials (9)</a></li>
-                        </ul>
-                    </div>
+                    <!-- Widget -->
+                    {% include 'partials/sidebar.html' %}
+                    <!-- /.end Widget -->
                 </div>
                 <!-- end sidebar -->
             </div>

@@ -1,0 +1,13 @@
+<div class="widget">
+    <h4 class="widget-title">CATEGORIES</h4>
+    <ul class="list-unstyled category-list">
+        <li class="active"><a href="{% url 'blogs:post-list' %}">All ({{ post_list.count }})</a></li>
+        {% for catagory in catagory_list %}
+            {% if catagory.post_count > 0 %}
+                <li>
+                    <a href="{{ catagory.get_absolute_url }}">{{ catagory.title }} ({{ catagory.post_count }})</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

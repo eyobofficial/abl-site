@@ -137,6 +137,9 @@ class Post(Base):
         self.read_count += 1
         self.save()
 
+    def approved_comments(self, *args, **kwargs):
+        return self.comments.filter(is_approved=True)
+
 
 class Comment(Base):
     post = models.ForeignKey(
@@ -149,7 +152,7 @@ class Comment(Base):
     content = models.TextField('Comment')
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
-    is_approved = models.BooleanField(default=True)
+    is_approved = models.BooleanField('Approved', default=True)
 
     class Meta:
         ordering = ['-post', '-created_at', ]

@@ -2,6 +2,21 @@
 {% load static %}
 
 {% block content %}
+<!-- BREADCRUMBS -->
+<div class="page-header breadcrumbs-only">
+    <div class="container">
+        <ol class="breadcrumb link-accent">
+            <li><a href="{% url 'pages:index' %}">Home</a></li>
+            <li><a href="{% url 'blogs:post-list' %}">Blogs</a></li>
+            {% if catagory %}
+            <li class="active">{{ catagory.title }}</li>
+            {% else %}
+            <li class="active">All</li>
+            {% endif %}
+        </ol>
+    </div>
+</div>
+<!-- END BREADCRUMBS -->
 <div class="page-content">
     <div class="container">
         <div class="row">
@@ -63,33 +78,9 @@
             <!-- SIDEBAR CONTENT -->
             <div class="col-md-4 col-lg-3">
                 <div class="sidebar">
+                   
                     <!-- widget -->
-                    <div class="widget">
-                        <h4 class="sr-only">SEARCH</h4>
-                        <form method="post">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="keyword" placeholder="Search for a blog">
-                                <span class="input-group-btn"><button class="btn btn-primary" type="button"><span>GO</span></button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- end widget -->
-
-                    <!-- widget -->
-                    <div class="widget">
-                        <h4 class="widget-title">CATEGORIES</h4>
-                        <ul class="list-unstyled category-list">
-                            <li class="active"><a href="{% url 'blogs:post-list' %}">All ({{ post_list.count }})</a></li>
-                            {% for catagory in catagory_list %}
-                                {% if catagory.post_count > 0 %}
-                                    <li>
-                                        <a href="{{ catagory.get_absolute_url }}">{{ catagory.title }} ({{ catagory.post_count }})</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {% include 'partials/sidebar.html' %}
                     <!-- end widget -->
 
                 </div>
