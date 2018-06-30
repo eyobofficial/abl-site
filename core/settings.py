@@ -32,6 +32,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,3 +130,36 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'blogs.CustomUser'
+
+LOGOUT_REDIRECT_URL = '/'
+
+# Django-suit Configurations
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'ABL Electrical Engineering',
+    'HEADER_DATE_FORMAT': 'M d, Y',
+    'SEARCH_URL': '/admin/pages/brand/',
+    'MENU': (
+        # Rename app and set icon
+        {'app': 'blogs', 'label': 'Blog', 'icon': 'icon-pencil', 'models': (
+            {'model': 'blogs.author', 'label': 'Authors'},
+            {'model': 'pages.catagory', 'label': 'Blog Catagories'},
+            {'model': 'pages.tag', 'label': 'Tags'},
+            {'model': 'pages.post', 'label': 'Blog Posts'},
+            {'model': 'pages.comment', 'label': 'Comments'},
+        )},
+        {'app': 'pages', 'label': 'Settings', 'icon': 'icon-cog', 'models': (
+            {'model': 'pages.brand', 'label': 'Company Details'},
+            {'model': 'pages.slide', 'label': 'Sliding Texts'},
+            {'model': 'pages.widget', 'label': 'Home Widgets'},
+            {'model': 'pages.staff', 'label': 'Team Staffs'},
+            {'model': 'pages.service', 'label': 'Services'},
+            {'model': 'pages.testimonial', 'label': 'Testimonials'},
+            {'model': 'pages.client', 'label': 'Clients'},
+            {'model': 'pages.subscriber', 'label': 'Email Subscribers'},
+        )},
+        {'label': 'Accounts', 'icon': 'icon-user', 'models': (
+            'pages.customuser', 'auth.group',
+        )},
+
+    ),
+}

@@ -61,8 +61,8 @@ class Brand(Base):
     description = models.TextField(blank=True)
 
     class Meta:
-        verbose_name = 'Company'
-        verbose_name_plural = 'Company'
+        verbose_name = 'Company Detail'
+        verbose_name_plural = 'Company Details'
 
     def __str__(self):
         return self.title
@@ -73,6 +73,10 @@ class Slide(Base):
     Models Slides
     """
     title = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Sliding Text'
+        verbose_name_plural = 'Sliding Texts'
 
     def __str__(self):
         return self.title
@@ -87,6 +91,10 @@ class Widget(Base):
     icon = models.TextField()
     link_title = models.CharField(max_length=60)
     link_url = models.CharField(max_length=60)
+
+    class Meta:
+        verbose_name = 'Home Widget'
+        verbose_name_plural = 'Home Widgets'
 
     def __str__(self):
         return self.title
