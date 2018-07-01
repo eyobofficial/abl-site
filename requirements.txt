@@ -1,5 +1,7 @@
 Django==2.0.6
+django-crispy-forms==1.7.2
 django-suit==0.2.26
+django-taggit==0.22.2
 Pillow==5.1.0
 python-decouple==3.1
 pytz==2018.4

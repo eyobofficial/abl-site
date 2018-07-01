@@ -20,20 +20,12 @@ class CatagoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 
-@admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('title', 'updated_at', )
-    search_fields = ('title', )
-    prepopulated_fields = {'slug': ('title', )}
-
-
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'catagory', 'author', 'status', 'updated_at', )
     list_filter = ('status', 'open_for_comment', 'author', )
     search_fields = ('title', 'summary', 'content', )
     prepopulated_fields = {'slug': ('title', )}
-    filter_horizontal = ('tags', )
 
 
 @admin.register(models.Comment)

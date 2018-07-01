@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <!-- BREADCRUMBS -->
@@ -105,14 +106,13 @@
                     <h3 class="section-heading">Comment{{ post.approved_comments.count|pluralize }} ({{ post.approved_comments.count }})</h3>
                     <ul class="media-list">
                         {% for comment in post.approved_comments %}
-                        <li class="media">
+                        <li class="media" id="comment-{{ comment.id }}">
                             <a href="#" class="media-left">
                                 <img src="{% static 'assets/img/avatar-placeholder.jpg' %}" class="avatar" alt="{{ comment.full_name }}">
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading comment-author"><a href="#">{{ comment.full_name }}</a></h4><span class="timestamp">May 28, 2016 12:30 PM</span>
-                                <p>{% lorem 30 w %}.</p>
-                                <p><a href="#"><i class="fa fa-reply"></i> Reply</a></p>
+                                <h4 class="media-heading comment-author"><a href="#">{{ comment.full_name }}</a></h4><span class="timestamp">{{ comment.created_at|date:'M d, Y h:i A' }}</span>
+                                <p>{{ comment.content }}</p>
                             </div>
                         </li>
                         {% endfor %}
@@ -122,35 +122,19 @@
                 <!-- end comments -->
                 <!-- comment form -->
                 <section class="comment-form margin-bottom">
+                    {% if post.open_for_comment %}
                     <h3 class="section-heading">Leave A Comment</h3>
                     <p class="heading">Required fields are marked *. Your email will not be published or shared.</p>
-                    <form class="form-horizontal">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name" class="control-label sr-only">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email" class="control-label sr-only">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment" class="control-label sr-only">Your Commment</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control" id="comment" name="comment" rows="5" cols="30" placeholder="Message"></textarea>
-                            </div>
-                        </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Submit Comment</button>
                             </div>
                         </div>
                     </form>
+                    {% endif %}
                 </section>
                 <!-- end comment form -->
             </div>

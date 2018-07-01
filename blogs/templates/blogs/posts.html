@@ -24,32 +24,37 @@
             <div class="col-md-8 col-lg-9">
                 <section class="no-padding-top">
                     <div class="row">
-                        {% for post in post_list %}
-                        <div class="col-sm-6">
-                            <div class="post-entry-card">
-                                <a href="{{ post.get_absolute_url }}">
-                                    {% if post.picture %}
-                                    <img src="{{ post.picture.url }}" class="img-responsive" alt="{{ post.title }}">
-                                    {% else %}
-                                    <img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="{{ post.title }}">
-                                    {% endif %}
-                                </a>
-                                <div class="post-info">
-                                    <h3 class="post-title">
-                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                                    </h3>
-                                    <p class="post-excerpt">{{ post.content|truncatewords:20 }}...</p>
-                                    <span class="post-meta"><i class="fa fa-calendar-o"></i> {{ post.created_at|date:'M d, Y' }}</span>
-                                    <a href="{{ post.get_absolute_url }}" class="read-more pull-right">Read More</a>
+                        {% if post_list %}
+                            {% for post in post_list %}
+                            <div class="col-sm-6">
+                                <div class="post-entry-card">
+                                    <a href="{{ post.get_absolute_url }}">
+                                        {% if post.picture %}
+                                        <img src="{{ post.picture.url }}" class="img-responsive" alt="{{ post.title }}">
+                                        {% else %}
+                                        <img src="{% static 'assets/img/blog/blog-placeholder.png' %}" class="img-responsive" alt="{{ post.title }}">
+                                        {% endif %}
+                                    </a>
+                                    <div class="post-info">
+                                        <h3 class="post-title">
+                                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                        </h3>
+                                        <p class="post-excerpt">{{ post.content|truncatewords:20 }}...</p>
+                                        <span class="post-meta"><i class="fa fa-calendar-o"></i> {{ post.created_at|date:'M d, Y' }}</span>
+                                        <a href="{{ post.get_absolute_url }}" class="read-more pull-right">Read More</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                        <h2 class="h3 text-fade text-center"><i class="fa fa-info-circle"></i> We currently have no blog posts in this catagory</h2>
+                        {% endif %}
                     </div>
                 </section>
                 <!-- end latest posts -->
 
                 <!-- categorized posts -->
+                {% if popular_posts %}
                 <section class="categorized-posts">
                     <h2 class="section-heading pull-left">POPULAR</h2>
                     <div class="clearfix"></div>
@@ -72,6 +77,7 @@
                         {% endfor %}
                     </div>
                 </section>
+                {% endif %}
                 <!-- end categorized posts -->
             </div>
             <!-- END MAIN CONTENT -->

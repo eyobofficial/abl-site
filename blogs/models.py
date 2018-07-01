@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class PostManager(models.Manager):
@@ -75,18 +76,6 @@ class Catagory(Base):
         return self.posts.published().count()
 
 
-class Tag(Base):
-    title = models.CharField(max_length=60)
-    slug = models.SlugField(unique=True)
-
-    class Meta:
-        get_latest_by = ['-created_at', '-updated_at', ]
-        ordering = ['title', ]
-
-    def __str__(self):
-        return self.title
-
-
 class Post(Base):
     POST_STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -113,15 +102,12 @@ class Post(Base):
         choices=POST_STATUS_CHOICES,
         default='draft',
     )
-    tags = models.ManyToManyField(
-        Tag, blank=True,
-        related_name='posts',
-    )
     open_for_comment = models.BooleanField(default=True)
     read_count = models.PositiveIntegerField(default=1)
 
     # Managers
     objects = PostManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ['-created_at', '-updated_at', 'title', ]
@@ -150,13 +136,15 @@ class Comment(Base):
     full_name = models.CharField(max_length=120)
     email = models.EmailField()
     content = models.TextField('Comment')
-    upvotes = models.PositiveIntegerField(default=0)
-    downvotes = models.PositiveIntegerField(default=0)
     is_approved = models.BooleanField('Approved', default=True)
 
     class Meta:
-        ordering = ['-post', '-created_at', ]
+        ordering = ['-post', 'created_at', ]
         get_latest_by = ['-created_at', ]
 
     def __str__(self):
         return '{} comment on {}'.format(self.full_name, self.post)
+
+    def update_likes(self, *args, **kwargs):
+        self.likes += 1
+        self.save()

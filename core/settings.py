@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party Apps
+    'crispy_forms',
+    'taggit',
+
+    # Project Apps
     'blogs.apps.BlogsConfig',
     'pages.apps.PagesConfig',
 ]
@@ -132,6 +138,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'blogs.CustomUser'
 
 LOGOUT_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Django-suit Configurations
 SUIT_CONFIG = {
