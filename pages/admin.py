@@ -53,3 +53,10 @@ class MessageAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'subject', 'sent_date', 'is_seen', ]
     search_fields = ['name', 'email', 'subject', ]
     readonly_fields = ['name', 'email', 'subject', 'content', 'sent_date', ]
+    exclude = ['is_seen']
+
+    def get_form(self, request, obj, *args, **kwargs):
+        if obj.is_seen is False:
+            obj.is_seen = True
+            obj.save()
+        return super().get_form(request, obj, *args, **kwargs)

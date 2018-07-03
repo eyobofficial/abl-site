@@ -1,15 +1,6 @@
 from django.db import models
 
 
-# Custom Message manager
-class MessageManager(models.Manager):
-    def get(self, *args, **kwargs):
-        obj = super().get(*args, **kwargs)
-        if obj.is_seen is False:
-            obj.is_seen = True
-        return obj
-
-
 class Base(models.Model):
     """
     Abstract Base Model
@@ -225,9 +216,6 @@ class Message(models.Model):
     content = models.TextField('Message')
     sent_date = models.DateTimeField(auto_now_add=True)
     is_seen = models.BooleanField('Seen', default=False)
-
-    # Custom manager
-    objects = MessageManager()
 
     class Meta:
         ordering = ['-sent_date', 'name', ]

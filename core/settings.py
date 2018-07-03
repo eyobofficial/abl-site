@@ -150,10 +150,10 @@ SUIT_CONFIG = {
         # Rename app and set icon
         {'app': 'blogs', 'label': 'Blog', 'icon': 'icon-pencil', 'models': (
             {'model': 'blogs.author', 'label': 'Authors'},
-            {'model': 'pages.catagory', 'label': 'Blog Catagories'},
-            {'model': 'pages.tag', 'label': 'Tags'},
-            {'model': 'pages.post', 'label': 'Blog Posts'},
-            {'model': 'pages.comment', 'label': 'Comments'},
+            {'model': 'blogs.catagory', 'label': 'Blog Catagories'},
+            {'model': 'blogs.tag', 'label': 'Tags'},
+            {'model': 'blogs.post', 'label': 'Blog Posts'},
+            {'model': 'blogs.comment', 'label': 'Comments'},
         )},
         {'app': 'pages', 'label': 'Settings', 'icon': 'icon-cog', 'models': (
             {'model': 'pages.brand', 'label': 'Company Details'},
@@ -164,6 +164,7 @@ SUIT_CONFIG = {
             {'model': 'pages.testimonial', 'label': 'Testimonials'},
             {'model': 'pages.client', 'label': 'Clients'},
             {'model': 'pages.subscriber', 'label': 'Email Subscribers'},
+            {'model': 'pages.message', 'label': 'Messages'},
         )},
         {'label': 'Accounts', 'icon': 'icon-user', 'models': (
             'pages.customuser', 'auth.group',
