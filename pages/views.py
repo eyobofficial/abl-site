@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 
 from . import models
 from . import forms
@@ -47,8 +47,28 @@ class ServiceView(TemplateView):
         return context
 
 
-class ContactView(TemplateView):
+class ContactViewOld(TemplateView):
     template_name = 'pages/contact.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['brand'] = get_object_or_404(models.Brand, pk=1)
+        context['page'] = 'contact'
+        return context
+
+
+class ContactView(CreateView):
+    model = models.Message
+    template_name = 'pages/contact.html'
+    success_url = '/contact/'
+    form_class = forms.ContactForm
+
+    def form_valid(self, form, *args, **kwargs):
+        messages.success(
+            self.request,
+            'Thank you for your feedback!'
+        )
+        return super().form_valid(form, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

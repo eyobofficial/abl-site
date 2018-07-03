@@ -46,3 +46,10 @@ class ClientAdmin(admin.ModelAdmin):
 @admin.register(models.Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ['email', 'created_at']
+
+
+@admin.register(models.Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'subject', 'sent_date', 'is_seen', ]
+    search_fields = ['name', 'email', 'subject', ]
+    readonly_fields = ['name', 'email', 'subject', 'content', 'sent_date', ]

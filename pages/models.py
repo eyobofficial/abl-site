@@ -1,6 +1,15 @@
 from django.db import models
 
 
+# Custom Message manager
+class MessageManager(models.Manager):
+    def get(self, *args, **kwargs):
+        obj = super().get(*args, **kwargs)
+        if obj.is_seen is False:
+            obj.is_seen = True
+        return obj
+
+
 class Base(models.Model):
     """
     Abstract Base Model
@@ -206,7 +215,7 @@ class Subscriber(Base):
         return self.email
 
 
-class Message(Base):
+class Message(models.Model):
     """
     Models a contact message
     """
@@ -214,10 +223,15 @@ class Message(Base):
     email = models.EmailField()
     subject = models.CharField(max_length=120)
     content = models.TextField('Message')
+    sent_date = models.DateTimeField(auto_now_add=True)
+    is_seen = models.BooleanField('Seen', default=False)
+
+    # Custom manager
+    objects = MessageManager()
 
     class Meta:
-        ordering = ['-created_at', 'name', ]
-        get_latest_by = ['-created_at', ]
+        ordering = ['-sent_date', 'name', ]
+        get_latest_by = ['-sent_date', ]
 
     def __str__(self):
         return self.name
