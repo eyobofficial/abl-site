@@ -204,3 +204,20 @@ class Subscriber(Base):
 
     def __str__(self):
         return self.email
+
+
+class Message(Base):
+    """
+    Models a contact message
+    """
+    name = models.CharField(max_length=120)
+    email = models.EmailField()
+    subject = models.CharField(max_length=120)
+    content = models.TextField('Message')
+
+    class Meta:
+        ordering = ['-created_at', 'name', ]
+        get_latest_by = ['-created_at', ]
+
+    def __str__(self):
+        return self.name
