@@ -56,7 +56,7 @@ class MessageAdmin(admin.ModelAdmin):
     exclude = ['is_seen']
 
     def get_form(self, request, obj, *args, **kwargs):
-        if obj.is_seen is False:
+        if obj and obj.is_seen is False:
             obj.is_seen = True
             obj.save()
         return super().get_form(request, obj, *args, **kwargs)

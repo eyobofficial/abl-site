@@ -3,8 +3,14 @@ from . import models
 
 
 @admin.register(models.CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'get_full_name', )
+class CustomUserModel(admin.ModelAdmin):
+    list_display = ['username', 'full_name', 'last_login', ]
+    filter_horizontal = ['groups', ]
+    exclude = ['user_permissions', 'is_superuser', 'groups', ]
+    readonly_fields = ['last_login', 'date_joined']
+
+    def full_name(self, obj):
+        return obj.get_full_name()
 
 
 @admin.register(models.Author)
