@@ -51,17 +51,9 @@
                             <span class="title">{{ staff.title }}</span>
                             <p class="short-bio">{{ staff.description }}</p>
                             <ul class="list-inline social-icons social-icons-small">
-                                {% if staff.facebook %}
                                 <li><a href="{{ staff.facebook }}" class="facebook-bg-hover"><i class="fa fa-facebook"></i></a></li>
-                                {% endif %}
-
-                                {%  if staff.lindedin %}
                                 <li><a href="{{ staff.lindedin }}" class="linkedin-bg-hover"><i class="fa fa-linkedin"></i></a></li>
-                                {% endif %}
-
-                                {% if staff.twitter %}
                                 <li><a href="{{ staff.twitter }}" class="twitter-bg-hover"><i class="fa fa-twitter"></i></a></li>
-                                {% endif %}
                             </ul>
                         </div>
                     </div>
