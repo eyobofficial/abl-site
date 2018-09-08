@@ -54,6 +54,7 @@
                         {% endif %}
                         <div class="text">
                             <strong class="name">{{ testimonial.client }}</strong>
+                            <h5>{{ testimonial.position|upper }}</h5>
                             <span class="rating">
                                 {% for star in testimonial.get_stars %}
                                     {% if star == '*' %}

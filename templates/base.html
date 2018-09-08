@@ -1,10 +1,11 @@
 {% load static %}<!DOCTYPE html>
 <html lang="en" {% if page == 'home' %}class="fullscreen-bg"{% endif %}>
 <head>
-	<title>{% block title %} {{ page|title }} - ABL Engineering{% endblock %}</title>
+	<title>{% block title %} {{ page|title }} - ABL Electrical Engineering{% endblock %}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
+	<meta name="description" content="{{ brand.description }}">
+	<meta name="keywords" content="{{ brand.kewywords }}">
 	<meta name="author" content="Eyob Tariku">
 	<!-- CORE CSS -->
 	<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
@@ -21,7 +22,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="">
 	<link rel="">
 	<link rel="apple-touch-icon-precomposed" href="">
-	<link rel="shortcut icon" href="">
+	<link rel="shortcut icon" href="{{ brand.fevicon }}">
 
 	<!--
 	<script src="https://use.fontawesome.com/e770b12ff4.js"></script>
@@ -154,9 +155,9 @@
 						<p class="copyright-text">&copy; {% now 'Y' %}. ABL Engineering PLC. Developed by <a href="#">EyobOfficial</a></p>
 					</div>
 					<ul class="right list-inline social-icons social-icons-bordered social-icons-small social-icons-fullrounded">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="{{ brand.facebook }}"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="{{ brand.twitter }}"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="{{ brand.linkedin }}"><i class="fa fa-linkedin"></i></a></li>
 					</ul>
 				</div>
 			</div>
